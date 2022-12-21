@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluralsightFunction", "PluralsightFunction\PluralsightFunction.csproj", "{2DB23212-F67C-4FA8-998A-C98692D53F1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctionDemo", "AzureFunctionDemo\AzureFunctionDemo.csproj", "{2DB23212-F67C-4FA8-998A-C98692D53F1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
