@@ -12,12 +12,13 @@ public static class GenerateLicenseFile
     [FunctionName("GenerateLicenseFile")]
     public static void Run(
         [QueueTrigger("orders", Connection = "AzureWebJobsStorage")] Order order,
-        [Blob("licences/{rand-guid}.lic")] TextWriter outputBlob,ILogger log)
+        [Blob("licenses/{rand-guid}.lic")] TextWriter outputBlob,ILogger log)
     {
         // GenerateLicenseFile function will be triggered
         // when we add a new order object to the "orders" queue
         log.LogInformation($"C# Queue trigger function processed: {order}");
         
+        outputBlob.WriteLine($"Email: {order.Email}");
         outputBlob.WriteLine($"OrderId: {order.OrderId}");
         outputBlob.WriteLine($"ProductId: {order.ProductId}");
         outputBlob.WriteLine($"Price: {order.Price}");
