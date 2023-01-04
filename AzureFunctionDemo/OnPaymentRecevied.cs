@@ -1,12 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -24,6 +21,7 @@ public static class OnPaymentReceived
         ILogger log)
     {
         // since route is set to null, by default it's /api/OnPaymentReceived
+        // this function will be triggered when we call /api/OnPaymentReceived endpoint with the body params
         
         log.LogInformation("Payment received");
 
@@ -35,7 +33,7 @@ public static class OnPaymentReceived
         // The connectionstr that belongs to the queue is kept in local.settings.json > AzureWebJobsStorage
         await orderQueue.AddAsync(order);
 
-        order.PartitionKey = "orders";
+        order.PartitionKey = "PKorders";
         order.RowKey = order.OrderId;
         await orderTable.AddAsync(order);
         
