@@ -11,17 +11,15 @@ public static class EmailLicenseFiles
     [FunctionName("EmailLicenseFiles")]
     public static void Run(
         [BlobTrigger("licenses/{orderId}.lic")]string licenseFileContents,
-        //[SendGrid(ApiKey = "SendGridApiKey")] out SendGridMessage message,
         [SendGrid(ApiKey = "SendGridApiKey")] ICollector<SendGridMessage> sender,
         [Table("orders","PKorders","{orderId}")] Order order,
-        //string name, 
         string orderId,
         ILogger log)
     {
         log.LogInformation($"C# Blob trigger function Processed blob\n Name:{orderId}.lic \n Size: {licenseFileContents.Length} Bytes");
 
         //look up the database to find what the email address is
-        var email = order.Email;//"test@hotmail.com"; //Regex.Match(licenseFileContents, @"^email\:\ (.+)$", RegexOptions.Multiline).Groups[1].Value;
+        var email = order.Email;
         log.LogInformation($"Got order from {email}\n License file name: {orderId}.lic");
 
         var message = new SendGridMessage

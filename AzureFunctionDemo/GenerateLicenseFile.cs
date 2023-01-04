@@ -13,7 +13,6 @@ public static class GenerateLicenseFile
     [FunctionName("GenerateLicenseFile")]
     public static async Task Run(
         [QueueTrigger("orders", Connection = "AzureWebJobsStorage")] Order order,
-        //[Blob("licenses/{rand-guid}.lic")] TextWriter outputBlob
         IBinder binder
         ,ILogger log)
     {
